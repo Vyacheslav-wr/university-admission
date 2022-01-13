@@ -14,6 +14,7 @@ public class Faculty extends AbstractEntity{
 
     private String name;
     private Integer studentsSpots;
+    private String image;
 
     @OneToMany(mappedBy = "faculty")
     private List<Enrollee> enrollees;

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Faculties</title>
+</head>
+<body>
+<div th:each="faculty:${faculties}">
+    <form th:action="@{/faculty/subjects}">
+        <div>
+            <input name="id" type="number" th:value="${faculty.getId()}" readonly>
+            <button type="submit">Hello</button>
+        </div>
+    </form>
+    <div th:text="${faculty.getName()}"></div>
+    <div th:text="${faculty.getStudentsSpots()}"></div>
+</div>
+<div th:replace="parts/footer.html :: boi"></div>
+</body>
+</html>

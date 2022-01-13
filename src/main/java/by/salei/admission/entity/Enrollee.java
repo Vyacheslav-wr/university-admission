@@ -14,10 +14,8 @@ public class Enrollee extends AbstractEntity {
 
     private String firstName;
     private String lastName;
-
-    @OneToOne
-    @JoinColumn(name = "certificate_id", unique = true)
-    private Certificate certificate;
+    private Integer score;
+    private String email;
 
     @OneToMany(mappedBy = "enrollee")
     private List<EnrolleeSubject> enrolleeSubjects;

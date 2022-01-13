@@ -14,7 +14,7 @@ public class EnrolleeSubject extends AbstractEntity{
     private Integer score;
 
     @ManyToOne
-    @JoinColumn(name = "subject_type_id")
+    @JoinColumn(name = "subject_type")
     private Subject subject_type;
 
     @ManyToOne

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Faculty</title>
+</head>
+<body>
+<div th:each="subject:${subjects}">
+    <div th:text="${subject.getId()}"></div>
+    <form th:action="">
+        <div th:name="aleh" th:text="${subject.getSubjectType()}"></div>
+        <input name="score" type="number" required>
+        <button type="submit">Register</button>
+    </form>
+</div>
+</body>
+</html>

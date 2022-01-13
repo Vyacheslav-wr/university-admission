@@ -13,7 +13,7 @@ import java.util.List;
 public class Subject extends AbstractEntity{
 
     @Enumerated(EnumType.STRING)
-    private SubjectType subjectType;
+    private SubjectType type;
 
     @OneToMany(mappedBy = "subject_type")
     private List<EnrolleeSubject> subjects;

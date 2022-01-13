@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface Dao<T extends AbstractEntity> {
 
-    T create(T entity);
+    T save(T entity);
 
     T update(T newEntity);
 
