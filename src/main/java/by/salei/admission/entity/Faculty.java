@@ -1,7 +1,6 @@
 package by.salei.admission.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,6 +9,9 @@ import java.util.List;
 @Entity
 @Table(name = "faculty")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Faculty extends AbstractEntity{
 
     private String name;

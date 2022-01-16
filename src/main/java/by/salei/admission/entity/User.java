@@ -3,17 +3,15 @@ package by.salei.admission.entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-public class User extends AbstractEntity{
+@Table(name = "app_user")
+public class User extends AbstractEntity {
 
-    private String login;
+    private String username;
     private String password;
 
     @Enumerated(EnumType.STRING)

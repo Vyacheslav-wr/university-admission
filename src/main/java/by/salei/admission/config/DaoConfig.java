@@ -1,4 +1,4 @@
-package by.salei.admission.dao.config;
+package by.salei.admission.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;

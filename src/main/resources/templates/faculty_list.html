@@ -3,18 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Faculties</title>
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/icons/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <!--===============================================================================================-->
+    <!--===============================================================================================-->
 </head>
 <body>
+<header>
+    <div class="header" th:insert="parts/header.html :: header"></div>
+</header>
 <div th:each="faculty:${faculties}">
-    <form th:action="@{/faculty/subjects}">
-        <div>
-            <input name="id" type="number" th:value="${faculty.getId()}" readonly>
-            <button type="submit">Hello</button>
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54" style="top: 70px; position: absolute">
+                <form th:action="'/faculty/' + ${faculty.getId} + '/subjects'">
+                    <div>
+                        <img src="/img/koorpus.jpg" width="170" height="140">
+                    </div>
+                    <div th:text="${faculty.getName()}"></div>
+                    <div th:text="'Students Spots: ' + ${faculty.getStudentsSpots()}"></div>
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button class="login100-form-btn" type="submit">
+                                Info
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-    </form>
-    <div th:text="${faculty.getName()}"></div>
-    <div th:text="${faculty.getStudentsSpots()}"></div>
+    </div>
 </div>
-<div th:replace="parts/footer.html :: boi"></div>
+<div class="footer" th:insert="parts/footer.html :: info"></div>
 </body>
 </html>
