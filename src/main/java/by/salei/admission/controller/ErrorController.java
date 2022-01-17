@@ -11,7 +11,7 @@ public class ErrorController {
 
     @GetMapping()
     public ModelAndView findException(ModelAndView modelAndView){
-        modelAndView.setViewName("LoginPage");
+        modelAndView.setViewName("login_page");
         return modelAndView;
     }
 }

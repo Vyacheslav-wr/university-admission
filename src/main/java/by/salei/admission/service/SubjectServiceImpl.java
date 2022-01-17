@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SubjectServiceImpl implements SubjectService {
@@ -51,6 +52,16 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public List<SubjectGetDto> getAll() {
-        return null;
+
+        List<Subject> subjects = subjectDao.getAll();
+
+        return subjects
+                .stream()
+                .map(entity -> SubjectGetDto
+                        .builder()
+                        .id(entity.getId())
+                        .subjectType(entity.getType().toString())
+                        .build()
+                ).collect(Collectors.toList());
     }
 }

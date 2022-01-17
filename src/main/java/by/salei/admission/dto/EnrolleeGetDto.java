@@ -14,4 +14,6 @@ public class EnrolleeGetDto extends AbstractGetDto {
     private String lastName;
     private Integer score;
     private Long user_id;
+    private Integer generalScore;
+    private String status;
 }

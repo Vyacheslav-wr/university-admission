@@ -31,11 +31,19 @@
 <header>
     <div class="header" th:insert="parts/header.html :: header"></div>
 </header>
-<div th:each="faculty:${faculties}">
+<div>
     <div class="limiter">
-        <div class="container-login100">
-            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54" style="top: 70px; position: absolute">
-                <form th:action="'/faculty/' + ${faculty.getId} + '/subjects'">
+        <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+                <div class="login100-form-bgbtn"></div>
+                    <div th:if="${user} ne null">
+                        <a href="/faculty/new" class="login100-form-btn" th:if="${user.getRole().equals('ADMIN')}"> Add faculty</a>
+                    </div>
+                </div>
+        </div>
+        <div class="container-login100" >
+            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54" style="top: 70px; position: absolute" >
+                <form th:action="'/faculty/' + ${faculty.getId} + '/subjects'" th:each="faculty:${faculties}">
                     <div>
                         <img src="/img/koorpus.jpg" width="170" height="140">
                     </div>
@@ -54,6 +62,5 @@
         </div>
     </div>
 </div>
-<div class="footer" th:insert="parts/footer.html :: info"></div>
 </body>
 </html>

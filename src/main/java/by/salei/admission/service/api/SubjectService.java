@@ -5,4 +5,5 @@ import by.salei.admission.dto.SubjectGetDto;
 import by.salei.admission.dto.SubjectUpdateDto;
 
 public interface SubjectService extends Service<SubjectCreateDto, SubjectGetDto, SubjectUpdateDto> {
+
 }

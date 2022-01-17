@@ -2,6 +2,7 @@ package by.salei.admission.dao;
 
 import by.salei.admission.dao.api.EnrolleeDao;
 import by.salei.admission.entity.Enrollee;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;

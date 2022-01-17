@@ -1,8 +1,6 @@
 package by.salei.admission.entity;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -14,6 +12,8 @@ import javax.persistence.Table;
 @Table(name = "subject")
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class EnrolleeSubject extends AbstractEntity{
 
     private Integer score;

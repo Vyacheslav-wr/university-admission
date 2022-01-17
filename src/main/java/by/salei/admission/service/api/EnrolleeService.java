@@ -12,4 +12,6 @@ public interface EnrolleeService extends Service<EnrolleeCreateDto, EnrolleeGetD
     Boolean isAlreadyRegistered(Long id);
 
     void setFaculty(Long faculty_id, Long enrollee_id);
+
+    void setStatus(Long id, String status);
 }

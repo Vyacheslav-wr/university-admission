@@ -7,6 +7,7 @@ import by.salei.admission.dto.EnrolleeCreateDto;
 import by.salei.admission.dto.EnrolleeGetDto;
 import by.salei.admission.dto.EnrolleeUpdateDto;
 import by.salei.admission.entity.Enrollee;
+import by.salei.admission.entity.EnrolleeStatus;
 import by.salei.admission.entity.Faculty;
 import by.salei.admission.service.api.EnrolleeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ public class EnrolleeServiceImpl implements EnrolleeService {
         enrollee.setEmail(entity.getEmail());
         enrollee.setScore(entity.getScore());
         enrollee.setUser(userDao.getById(entity.getUser()));
+        enrollee.setStatus(EnrolleeStatus.REGISTERED);
 
         enrolleeDao.save(enrollee);
 
@@ -46,8 +48,19 @@ public class EnrolleeServiceImpl implements EnrolleeService {
     @Override
     public EnrolleeUpdateDto update(EnrolleeUpdateDto newEntity) {
 
+        Enrollee enrollee = new Enrollee();
 
-        return null;
+        enrollee.setId(newEntity.getId());
+        enrollee.setFirstName(newEntity.getFirstName());
+        enrollee.setLastName(newEntity.getLastName());
+        enrollee.setEmail(newEntity.getEmail());
+        enrollee.setScore(newEntity.getScore());
+        enrollee.setStatus(EnrolleeStatus.valueOf(newEntity.getStatus()));
+        enrollee.setStatus(EnrolleeStatus.valueOf(newEntity.getStatus()));
+
+        enrolleeDao.update(enrollee);
+
+        return newEntity;
     }
 
     @Override
@@ -66,6 +79,7 @@ public class EnrolleeServiceImpl implements EnrolleeService {
                 .lastName(enrollee.getLastName())
                 .score(enrollee.getScore())
                 .user_id(enrollee.getUser().getId())
+                .status(enrollee.getStatus().toString())
                 .build();
     }
 
@@ -79,9 +93,10 @@ public class EnrolleeServiceImpl implements EnrolleeService {
                                         .builder()
                                         .id(entity.getId())
                                         .firstName(entity.getFirstName())
-                                        .lastName(entity.getFirstName())
+                                        .lastName(entity.getLastName())
                                         .score(entity.getScore())
                                         .user_id(entity.getUser().getId())
+                                        .status(entity.getStatus().toString())
                                         .build()
                         ).collect(Collectors.toList());
     }
@@ -100,6 +115,7 @@ public class EnrolleeServiceImpl implements EnrolleeService {
         return enrolleeDao.getById(id).getFaculty() != null;
     }
 
+    //@Transactional
     @Override
     public void setFaculty(Long faculty_id, Long enrollee_id) {
         Faculty faculty = facultyDao.getById(faculty_id);
@@ -107,6 +123,15 @@ public class EnrolleeServiceImpl implements EnrolleeService {
         Enrollee enrollee = enrolleeDao.getById(enrollee_id);
 
         enrollee.setFaculty(faculty);
+    }
+
+    //@Transactional
+    @Override
+    public void setStatus(Long id, String status) {
+
+        Enrollee enrollee = enrolleeDao.getById(id);
+        enrollee.setStatus(EnrolleeStatus.valueOf(status));
+        enrolleeDao.update(enrollee);
     }
 
 }

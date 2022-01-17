@@ -17,15 +17,15 @@ public class Enrollee extends AbstractEntity {
     private Integer score;
     private String email;
 
+    @Enumerated(EnumType.STRING)
+    private EnrolleeStatus status;
+
     @OneToMany(mappedBy = "enrollee")
     private List<EnrolleeSubject> enrolleeSubjects;
 
     @ManyToOne
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
-
-    @OneToOne(mappedBy = "enrollee")
-    private Student student;
 
     @OneToOne
     @JoinColumn(name = "user_id")

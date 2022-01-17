@@ -6,12 +6,14 @@ import by.salei.admission.dao.api.SubjectDao;
 import by.salei.admission.dto.EnrolleeSubjectCreateDto;
 import by.salei.admission.dto.EnrolleeSubjectGetDto;
 import by.salei.admission.dto.EnrolleeSubjectUpdateDto;
+import by.salei.admission.entity.Enrollee;
 import by.salei.admission.entity.EnrolleeSubject;
 import by.salei.admission.service.api.EnrolleeSubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EnrolleeSubjectServiceImpl implements EnrolleeSubjectService {
@@ -54,5 +56,22 @@ public class EnrolleeSubjectServiceImpl implements EnrolleeSubjectService {
     @Override
     public List<EnrolleeSubjectGetDto> getAll() {
         return null;
+    }
+
+    @Override
+    public Integer calculateGeneralEnrolleeScore(Long id) {
+
+        Enrollee enrollee = enrolleeDao.getById(id);
+
+        List<EnrolleeSubject> subjects = enrolleeSubjectDao.getAll()
+                .stream()
+                .filter(entity -> entity.getEnrollee().equals(enrollee))
+                .collect(Collectors.toList());
+
+        int score = subjects.stream()
+                .mapToInt(EnrolleeSubject::getScore)
+                .sum();
+
+        return score + enrollee.getScore();
     }
 }

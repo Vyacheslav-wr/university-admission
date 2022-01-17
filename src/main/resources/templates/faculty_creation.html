@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th = "http://www.thymeleaf.org">
 <head>
-    <title>Register</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>New Faculty</title>
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="/icons/icons/favicon.ico"/>
     <!--===============================================================================================-->
@@ -28,72 +27,66 @@
     <!--===============================================================================================-->
 </head>
 <body>
-
+<header>
+    <div class="header" th:insert="parts/header.html :: header"></div>
+</header>
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-            <form method="post" class="login100-form validate-form" th:action="@{/validity}">
+            <form method="post" class="login100-form validate-form" th:action="@{/faculty/create}">
 					<span class="login100-form-title p-b-49">
-						Register
+						Faculty
 					</span>
 
-                <div class="wrap-input100 validate-input m-b-23" data-validate = "Username is required">
-                    <span class="label-input100">Username</span>
-                    <input class="input100" type="text" name="username" placeholder="Type your username">
+                <div class="wrap-input100 validate-input m-b-23" data-validate = "Faculty name is required">
+                    <span class="label-input100">Faculty Name</span>
+                    <input class="input100" type="text" name="name" placeholder="Type faculty name">
                     <span class="focus-input100" data-symbol="&#xf206;"></span>
                 </div>
-                <div class="wrap-input100 validate-input m-b-23" th:if="${error} ne null">
-                    <span class="label-input100" th:text="${error}" th:style="'color:red'"></span>
-                </div>
 
-                <div class="wrap-input100 validate-input" data-validate="Password is required">
-                    <span class="label-input100">Password</span>
-                    <input class="input100" type="password" name="password" placeholder="Type your password">
+                <div class="wrap-input100 validate-input" data-validate="Students spots is required">
+                    <span class="label-input100">Students Spots</span>
+                    <input class="input100" type="number" name="studentsSpots" placeholder="Type students spots">
                     <span class="focus-input100" data-symbol="&#xf190;"></span>
                 </div>
 
-                <div class="wrap-input100 validate-input m-b-23" data-validate = "First Name is required">
-                    <span class="label-input100">First Name</span>
-                    <input class="input100" type="text" name="firstName" placeholder="Type your First Name">
+                <div class="wrap-input100 validate-input m-b-23" data-validate = "Subject2 is required">
+                    <span class="label-input100">Subject One</span>
+                    <select name="subject1" class="input100" type="text">
+                        <option th:each="subject:${subjects}" th:value="${subject.getSubjectType()}" th:text="${subject.getSubjectType()}">
+                    </select>
                     <span class="focus-input100" data-symbol="&#xf206;"></span>
                 </div>
 
-                <div class="wrap-input100 validate-input m-b-23" data-validate = "Lasts Name is required">
-                    <span class="label-input100">First Name</span>
-                    <input class="input100" type="text" name="lastName" placeholder="Type your Last Name">
+                <div class="wrap-input100 validate-input m-b-23" data-validate = "Subject2 is required">
+                    <span class="label-input100">Subject Two</span>
+                    <select name="subject2" class="input100" type="text">
+                        <option th:each="subject:${subjects}" th:value="${subject.getSubjectType()}" th:text="${subject.getSubjectType()}">
+                    </select>
                     <span class="focus-input100" data-symbol="&#xf206;"></span>
                 </div>
 
-                <div class="wrap-input100 validate-input m-b-23" data-validate = "Lasts Name is required">
-                    <span class="label-input100">Email</span>
-                    <input class="input100" type="text" name="email" placeholder="Type your Email">
+                <div class="wrap-input100 validate-input m-b-23" data-validate = "Subject3 is required">
+                    <span class="label-input100">Subject Three</span>
+                    <select name="subject3" class="input100" type="text">
+                        <option th:each="subject:${subjects}" th:value="${subject.getSubjectType()}" th:text="${subject.getSubjectType()}">
+                    </select>
                     <span class="focus-input100" data-symbol="&#xf206;"></span>
-                </div>
-
-                <div class="wrap-input100 validate-input m-b-23" data-validate = "Lasts Score is required">
-                    <span class="label-input100">Score</span>
-                    <input class="input100" type="number" name="score" placeholder="Type your Score">
-                    <span class="focus-input100" data-symbol="&#xf206;"></span>
-                </div>
-
-                <div class="wrap-input100 validate-input m-b-23" th:if="${error1} ne null">
-                    <span class="label-input100" th:text="${error1}" th:style="'color:red'"></span>
                 </div>
 
                 <div class="container-login100-form-btn">
                     <div class="wrap-login100-form-btn">
                         <div class="login100-form-bgbtn"></div>
                         <button class="login100-form-btn" type="submit">
-                            Register
+                            Create
                         </button>
                     </div>
                 </div>
+
             </form>
         </div>
     </div>
 </div>
-
-<!--===============================================================================================-->
 <script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
 <script src="/vendor/animsition/js/animsition.min.js"></script>
@@ -109,6 +102,8 @@
 <script src="/vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 <script src="/js/main.js"></script>
-
+<footer>
+    <div class="footer" th:insert="parts/footer.html :: footer"></div>
+</footer>
 </body>
 </html>

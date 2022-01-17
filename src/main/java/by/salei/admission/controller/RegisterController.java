@@ -6,27 +6,31 @@ import by.salei.admission.dto.UserGetDto;
 import by.salei.admission.service.api.EnrolleeService;
 import by.salei.admission.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 
-@RestController
+@Controller
 public class RegisterController {
 
-    @Autowired
-    EnrolleeService enrolleeService;
+    private final EnrolleeService enrolleeService;
+
+    private final UserService userService;
 
     @Autowired
-    UserService userService;
+    public RegisterController(EnrolleeService enrolleeService, UserService userService) {
+        this.enrolleeService = enrolleeService;
+        this.userService = userService;
+    }
 
     @GetMapping(value = "/register")
-    public ModelAndView register(ModelAndView modelAndView, HttpServletRequest request){
-        modelAndView.setViewName("RegisterPage");
+    public ModelAndView register(ModelAndView modelAndView, HttpServletRequest request) {
+        modelAndView.setViewName("register_page");
         modelAndView.addObject("error1", request.getSession().getAttribute("error1"));
         return modelAndView;
     }
@@ -35,15 +39,15 @@ public class RegisterController {
     public ModelAndView validate(@ModelAttribute UserCreateDto user,
                                  @ModelAttribute EnrolleeCreateDto enrollee,
                                  ModelAndView modelAndView,
-                                 HttpServletRequest request){
+                                 HttpServletRequest request) {
 
-        try{
+        try {
             userService.getByUsername(user.getUsername());
-        }
-        catch (NoResultException ex){
-            if(enrollee.getScore() > 100 || enrollee.getScore() < 0){
-                modelAndView.setViewName("RegisterPage");
-                modelAndView.addObject("error1", "Invalid score: " + enrollee.getScore());
+        } catch (NoResultException ex) {
+            if (enrollee.getScore() > 100 || enrollee.getScore() < 0) {
+                modelAndView.setViewName("register_page");
+                modelAndView.addObject("error1",
+                        "Invalid score: " + enrollee.getScore());
                 return modelAndView;
             }
 
@@ -59,8 +63,9 @@ public class RegisterController {
             return modelAndView;
         }
 
-        modelAndView.setViewName("RegisterPage");
-        modelAndView.addObject("error", "User with username: " + user.getUsername()
+        modelAndView.setViewName("register_page");
+        modelAndView.addObject("error",
+                "User with username: " + user.getUsername()
                 + " already exist");
         return modelAndView;
     }

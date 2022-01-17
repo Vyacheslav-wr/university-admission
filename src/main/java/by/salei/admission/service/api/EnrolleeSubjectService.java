@@ -6,4 +6,6 @@ import by.salei.admission.dto.EnrolleeSubjectUpdateDto;
 
 public interface EnrolleeSubjectService extends Service<EnrolleeSubjectCreateDto,
         EnrolleeSubjectGetDto, EnrolleeSubjectUpdateDto>{
+
+    Integer calculateGeneralEnrolleeScore(Long id);
 }

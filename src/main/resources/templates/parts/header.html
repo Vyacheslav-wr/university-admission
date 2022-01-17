@@ -28,11 +28,15 @@
 </head>
 <body>
 <div th:fragment="header" style="background-color: #1b1e21">
-    <div>
-        <div th:if="${user} ne null" th:style="'color:white'" th:text="${user.getUsername()}" style="text-decoration-color: #1b1e21"></div>
-        <a th:if="${user} ne null" th:href="@{/logout}" style="text-decoration-color: white">Logout</a>
-        <a th:unless="${user} ne null" th:href="@{/login}" style="text-decoration-color: white">Login</a>
+    <div th:if="${user} ne null">
+        <div th:style="'color:white'" th:text="${user.getUsername()}"></div>
+        <a th:href="@{/logout}" style="text-decoration-color: white">Logout</a>
         <a th:href="@{/faculty}" style="text-decoration-color: white; position: center">Home</a>
+        <a th:if="${user.getRole().equals('ADMIN')}" th:href="@{/users}" style="text-decoration-color: white; position: center">Enrollees</a>
+        <a th:if="${user.getRole().equals('ADMIN')}" th:href="@{/admission}" style="text-decoration-color: white; position: center">Start Admission</a>
+    </div>
+    <div th:if="${user} eq null" >
+        <a th:href="@{/login}" style="text-decoration-color: white">Login</a>
     </div>
 </div>
 </body>

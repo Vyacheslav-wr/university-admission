@@ -4,7 +4,6 @@ import by.salei.admission.dao.api.Dao;
 import by.salei.admission.entity.AbstractEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,21 +25,18 @@ public abstract class AbstractDao<T extends AbstractEntity> implements Dao<T> {
         return "%" + value.toLowerCase() + "%";
     }
 
-    @Transactional
     @Override
     public T save(T entity) {
         entityManager.persist(entity);
         return entity;
     }
 
-    @Transactional
     @Override
     public T update(T newEntity) {
         entityManager.merge(newEntity);
         return newEntity;
     }
 
-    @Transactional
     @Override
     public T delete(Long id) {
         entityManager.remove(entityManager.find(getEntityClass(), id));

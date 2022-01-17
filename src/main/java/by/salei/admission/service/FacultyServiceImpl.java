@@ -1,15 +1,18 @@
 package by.salei.admission.service;
 
 import by.salei.admission.dao.api.FacultyDao;
+import by.salei.admission.dao.api.SubjectDao;
 import by.salei.admission.dto.FacultyCreateDto;
 import by.salei.admission.dto.FacultyGetDto;
 import by.salei.admission.dto.FacultyUpdateDto;
 import by.salei.admission.dto.SubjectGetDto;
 import by.salei.admission.entity.Faculty;
+import by.salei.admission.entity.Subject;
 import by.salei.admission.service.api.FacultyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,12 +22,22 @@ public class FacultyServiceImpl implements FacultyService {
     @Autowired
     private FacultyDao facultyDao;
 
+    @Autowired
+    private SubjectDao subjectDao;
+
     @Override
     public FacultyCreateDto save(FacultyCreateDto entity) {
 
         Faculty faculty = new Faculty();
+        List<Subject> subjects = new ArrayList<>();
+
         faculty.setName(entity.getName());
         faculty.setStudentsSpots(entity.getStudentsSpots());
+        subjects.add(subjectDao.findByName(entity.getSubject0()));
+        subjects.add(subjectDao.findByName(entity.getSubject1()));
+        subjects.add(subjectDao.findByName(entity.getSubject2()));
+        faculty.setSubjects(subjects);
+
         facultyDao.save(faculty);
         return entity;
     }
